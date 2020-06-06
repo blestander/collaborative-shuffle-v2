@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SpotifyService } from '../spotify.service';
 
 @Component({
     selector: 'app-menu',
@@ -14,8 +15,14 @@ export class MenuComponent implements OnInit {
         algorithm: ['true-shuffle', Validators.required]
     });
 
-    constructor(private fb: FormBuilder) { }
+    constructor(
+        private fb: FormBuilder,
+        private spotify: SpotifyService
+    ) { }
 
     ngOnInit(): void {
+        this.spotify.devices.subscribe(ds => {
+            console.log(ds);
+        });
     }
 }
