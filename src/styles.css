@@ -26,3 +26,7 @@ a.button {
     border-radius: 5px;
     padding: 5px;
 }
+a.button:hover {
+    background-color: #191414;
+    cursor: pointer;
+}
