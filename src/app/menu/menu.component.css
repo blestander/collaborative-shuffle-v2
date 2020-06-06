@@ -1,0 +1,19 @@
+.menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+.left {
+    margin-right: 5px;
+
+    text-align: right;
+}
+.right {
+    margin-left: 5px;
+    text-align: left;
+}
