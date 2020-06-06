@@ -1,15 +1,39 @@
-.menu {
-    display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 10px;
-    row-gap: 20px;
+@media screen and (min-width: 485px) {
+    .menu {
+        display: grid;
+        grid-template-columns: auto auto;
+        column-gap: 10px;
+        row-gap: 20px;
+    }
+    label {
+        text-align: right;
+    }
+    select {
+        text-align: left;
+        margin-right: auto;
+        max-width: 100%;
+    }
+    .mobile-separator {
+        display: none;
+    }
 }
-label {
-    text-align: right;
+@media screen and (max-width: 485px) {
+    .menu {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: stretch;
+    }
+    label {
+        text-align: center;
+    }
+    select {
+        text-align: center;
+    }
 }
-select {
-    text-align: left;
-    margin-right: auto;
 
+select {
     font-family: Montserrat, sans-serif;
 }
+
