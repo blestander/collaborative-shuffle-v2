@@ -17,7 +17,11 @@ export class AuthComponent implements OnInit {
         this.spotify.authorizeIndirectGrant(
             location.href,
             "5ac550d329b64aba9bea1ee3a2dd3969",
-            ["playlist-read-private", "playlist-read-collaborative", "user-modify-playback-state"],
+            [
+                "playlist-read-private",
+                "playlist-read-collaborative",
+                "user-read-playback-state",
+                "user-modify-playback-state"],
         );
     }
 
