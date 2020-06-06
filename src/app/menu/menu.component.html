@@ -9,8 +9,9 @@
             <span class="mobile-separator">&nbsp;</span>
             <label for="deviceSelect">Select a device:</label>
             <select name="deviceSelect" formControlName="device" required>
-                <option value="d1">Device 1</option>
-                <option value="d2">Device 2</option>
+                <option *ngFor="let device of devices; index as index" [value]="index">
+                    {{ deviceDisplay(device) }}
+                </option>
             </select>
             <span class="mobile-separator">&nbsp;</span>
             <label for="algorithmSelect">Select a shuffle algorithm:</label>

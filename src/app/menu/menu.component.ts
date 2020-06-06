@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SpotifyService } from '../spotify.service';
+import { Device } from '../device';
 
 @Component({
     selector: 'app-menu',
@@ -15,14 +16,19 @@ export class MenuComponent implements OnInit {
         algorithm: ['true-shuffle', Validators.required]
     });
 
+    devices: Device[] = [];
+
     constructor(
         private fb: FormBuilder,
         private spotify: SpotifyService
     ) { }
 
     ngOnInit(): void {
-        this.spotify.devices.subscribe(ds => {
-            console.log(ds);
-        });
+        this.spotify.devices.subscribe(ds => this.devices = ds);
+    }
+
+    deviceDisplay(device: Device) {
+        let activeState = device.is_active ? "<ACTIVE>" : "<inactive>";
+        return `${device.name} ${activeState}`;
     }
 }
