@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-menu',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-    constructor() { }
+    form: FormGroup = this.fb.group({
+        playlist: ['', Validators.required],
+        device: ['', Validators.required],
+        algorithm: ['true-shuffle', Validators.required]
+    });
+
+    constructor(private fb: FormBuilder) { }
 
     ngOnInit(): void {
     }
-
 }

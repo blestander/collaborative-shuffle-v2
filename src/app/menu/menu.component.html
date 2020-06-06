@@ -1,22 +1,22 @@
 <div class="main-box">
-    <form>
+    <form [formGroup]="form">
         <div class="menu">
             <label for="playlistSelect">Select a playlist:</label>
-            <select name="playlistSelect">
-                <option>Playlist 1</option>
-                <option>Playlist 2</option>
+            <select name="playlistSelect" formControlName="playlist" required>
+                <option value="p1">Playlist 1</option>
+                <option value="p2">Playlist 2</option>
             </select>
             <label for="deviceSelect">Select a device:</label>
-            <select name="deviceSelect">
-                <option>Device 1</option>
-                <option>Device 2</option>
+            <select name="deviceSelect" formControlName="device" required>
+                <option value="d1">Device 1</option>
+                <option value="d2">Device 2</option>
             </select>
             <label for="algorithmSelect">Select a shuffle algorithm:</label>
-            <select name="algorithmSelect">
-                <option>True Shuffle</option>
-                <option>Perfect Collaborator Mix</option>
+            <select name="algorithmSelect" formControlName="algorithm" required>
+                <option value="true-shuffle">True Shuffle</option>
+                <option value="perfect-mix">Perfect Collaborator Mix</option>
             </select>
         </div>
-        <button>Shuffle</button>
+        <button type="submit" [disabled]="!form.valid">Shuffle</button>
     </form>
 </div>

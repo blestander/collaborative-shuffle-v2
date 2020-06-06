@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AuthComponent } from './auth/auth.component';
-import { RouterModule } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { MenuComponent } from './menu/menu.component';
     imports: [
         BrowserModule,
         RouterModule.forRoot([]),
+        ReactiveFormsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

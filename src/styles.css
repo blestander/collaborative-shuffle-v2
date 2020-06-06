@@ -34,3 +34,7 @@ a.button:hover, button:hover {
     background-color: #191414;
     cursor: pointer;
 }
+button:disabled {
+    background-color: grey;
+    cursor: default;
+}
