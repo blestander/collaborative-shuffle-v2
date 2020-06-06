@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SpotifyService } from '../spotify.service';
 
 @Component({
     selector: 'app-auth',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
 
-    constructor() { }
+    constructor(private spotify: SpotifyService) { }
 
     ngOnInit(): void {
+    }
+
+    authorize(): void {
+        this.spotify.authorizeIndirectGrant(
+            location.href,
+            "5ac550d329b64aba9bea1ee3a2dd3969",
+            ["playlist-read-private", "playlist-read-collaborative", "user-modify-playback-state"],
+        );
     }
 
 }
