@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from './spotify.service';
+import { ShuffleRequest } from './shuffle-request';
 
 @Component({
     selector: 'app-root',
@@ -15,5 +16,9 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.spotify.loggedIn.subscribe(loggedIn => this.loggedIn = loggedIn);
+    }
+
+    onShuffleRequested(request: ShuffleRequest): void {
+        console.log(request);
     }
 }

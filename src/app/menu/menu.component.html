@@ -21,6 +21,6 @@
                 <option value="perfect-mix">Perfect Collaborator Mix</option>
             </select>
         </div>
-        <button type="submit" [disabled]="!form.valid">Shuffle</button>
+        <button type="submit" [disabled]="!form.valid" (click)="onSubmit()">Shuffle</button>
     </form>
 </div>
