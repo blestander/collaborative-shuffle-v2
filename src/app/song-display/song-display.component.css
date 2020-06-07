@@ -1,0 +1,23 @@
+div.outer {
+    height: 100px;
+    width: 500px;
+}
+img {
+    height: 100px;
+    width: 100px;
+
+    float: left;
+    margin-right: 10px;
+}
+div.inner {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+p {
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
