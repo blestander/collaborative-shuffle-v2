@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map, pluck, exhaust } from 'rxjs/operators';
+import { Observable, of, generate, empty, pipe } from 'rxjs';
+import { map, pluck, exhaust, expand, mergeMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Device } from './device';
+import { SimplifiedPlaylist } from './playlist';
 
 const fragmentRegex = /access_token=(.*)&/
 
@@ -26,17 +27,27 @@ export class SpotifyService {
     }
 
     get devices(): Observable<Device[]> {
-        return this.http.get<DeviceResponse>(
-            "https://api.spotify.com/v1/me/player/devices",
-            {
-                headers: this.authHeader
-            }
-        ) // Returns Observable<DeviceResponse>
-            .pipe(pluck('devices')); // Returns Observable<Device[]>
+        return this.http.get<DeviceResponse>("https://api.spotify.com/v1/me/player/devices", {headers: this.authHeader})
+            .pipe(pluck('devices')); // Turns Observable<DeviceResponse> into Observable<Device
     }
 
-    // get userPlaylists(): Observable<Playlist> {
-    // }
+    get userPlaylists(): Observable<SimplifiedPlaylist> {
+        return this.http.get<PagingObject<SimplifiedPlaylist>>(
+            "https://api.spotify.com/v1/me/playlists",
+            {headers: this.authHeader}
+        ) // First page of paging objects
+            .pipe(expand(po => {
+                if (po.next)
+                    return this.http.get<PagingObject<SimplifiedPlaylist>>(
+                        po.next,
+                        {headers: this.authHeader}
+                    );
+                else
+                    return empty();
+            })) // All paging objects
+            .pipe(pluck('items')) // Observable<SimplifiedPlaylist[]>
+            .pipe(mergeMap(array => array)); // Observable<SimplifiedPlaylist>
+    }
 
     private get accessToken(): string {
         let fragment = location.hash.substr(1);
@@ -54,7 +65,7 @@ export class SpotifyService {
     }
 }
 
-interface PagingOption<T> {
+interface PagingObject<T> {
     href: string,
     items: T[],
     limit: number,

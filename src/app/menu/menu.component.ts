@@ -25,7 +25,7 @@ export class MenuComponent implements OnInit {
 
     ngOnInit(): void {
         this.spotify.devices.subscribe(ds => this.devices = ds);
-        // this.spotify.userPlaylists().subscribe(ps => console.log(ps));
+        this.spotify.userPlaylists.subscribe(ps => console.log(ps));
     }
 
     deviceDisplay(device: Device) {
