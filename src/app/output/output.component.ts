@@ -20,7 +20,7 @@ export class OutputComponent implements OnInit {
     }
 
     getArtists(song: PlaylistTrackObject): string[] {
-        return ["Some Artist"];
+        return song.track.artists.map(artist => artist.name);
     }
 
     getUsername(song: PlaylistTrackObject): string {
