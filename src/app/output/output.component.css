@@ -11,6 +11,10 @@ img {
 }
 div.song-info {
     height: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -21,4 +25,9 @@ p {
     text-align: left;
     margin-top: 0px;
     margin-bottom: 0px;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
