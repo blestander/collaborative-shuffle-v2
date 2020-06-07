@@ -67,6 +67,14 @@ export class SpotifyService {
             .pipe(mergeMap(array => array)); // Observable<PlaylistTrackObject>
     }
 
+    addItemToQueue(item_uri: string, device_id: string = undefined): Observable<void> {
+        return this.http.post<void>(
+            `https://api.spotify.com/v1/me/player/queue?uri=${item_uri}&device_id=${device_id}`,
+            {},
+            { headers: this.authHeader }
+        );
+    }
+
     private get accessToken(): string {
         let fragment = location.hash.substr(1);
         let result = fragmentRegex.exec(fragment);
