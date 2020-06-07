@@ -19,6 +19,7 @@
             <select name="algorithmSelect" formControlName="algorithm" required>
                 <option value="true-shuffle">True Shuffle</option>
                 <option value="perfect-mix">Perfect Collaborator Mix</option>
+                <option value="prob-mix">Probabilistic Collaborator Mix</option>
             </select>
         </div>
         <button type="submit" [disabled]="!form.valid" (click)="onSubmit()">Shuffle</button>
