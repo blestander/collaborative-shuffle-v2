@@ -1,6 +1,13 @@
 <div class="main-box">
     <h2>Results</h2>
     <div class="song-list">
-        <app-song-display *ngFor="let song of songs" [item]="song"></app-song-display>
+        <ng-container *ngFor="let song of songs">
+            <img [src]="getImageSrc(song)" />
+            <div class="song-info">
+                <p>{{getTitle(song)}}</p>
+                <p>{{getArtists(song).join(', ')}}</p>
+                <p>Added by {{getUsername(song)}}</p>
+            </div>
+        </ng-container>
     </div>
 </div>
