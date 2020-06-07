@@ -3,6 +3,7 @@
     <app-auth *ngIf="!loggedIn"></app-auth>
     <ng-container *ngIf="loggedIn">
         <app-menu *ngIf="!shuffleRequest" (shuffleRequested)="onShuffleRequested($event)"></app-menu>
+        <app-output *ngIf="shuffleRequest"></app-output>
     </ng-container>
     <app-footer></app-footer>
 </div>
