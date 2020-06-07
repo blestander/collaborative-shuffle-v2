@@ -19,7 +19,7 @@ export class SpotifyShuffleService {
             .pipe(mergeMap(songs => songs))
             .pipe(mergeMap(song => {
                 return this.spotify.addItemToQueue(song.track.uri, request.device.id).pipe(mergeMap(() => of(song)));
-            }));
+            }, 1));
             // .pipe(exhaust());
     }
 
