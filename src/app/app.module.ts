@@ -10,7 +10,6 @@ import { FooterComponent } from './footer/footer.component';
 import { AuthComponent } from './auth/auth.component';
 import { MenuComponent } from './menu/menu.component';
 import { OutputComponent } from './output/output.component';
-import { SongDisplayComponent } from './song-display/song-display.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +19,6 @@ import { SongDisplayComponent } from './song-display/song-display.component';
         AuthComponent,
         MenuComponent,
         OutputComponent,
-        SongDisplayComponent
     ],
     imports: [
         BrowserModule,
