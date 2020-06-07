@@ -9,5 +9,10 @@ export interface SimplifiedPlaylist {
     name: string,
     snapshot_id: string,
     uri: string,
-    // TODO Tracks
+    tracks?: TracksObject
+}
+
+export interface TracksObject {
+    href: string,
+    total: number,
 }
