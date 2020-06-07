@@ -6,7 +6,7 @@
             <div class="song-info">
                 <p>{{getTitle(song)}}</p>
                 <p>{{getArtists(song).join(', ')}}</p>
-                <p>Added by {{getUsername(song)}}</p>
+                <p *ngIf="getUsername(song) as username">Added by {{username}}</p>
             </div>
         </ng-container>
     </div>

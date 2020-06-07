@@ -24,7 +24,11 @@ export class OutputComponent implements OnInit {
     }
 
     getUsername(song: PlaylistTrackObject): string {
-        return "Some user";
+        let user = song.added_by;
+        if (user)
+            if (user.display_name)
+                return user.display_name;
+        return "";
     }
 
     getImageSrc(song: PlaylistTrackObject): string {

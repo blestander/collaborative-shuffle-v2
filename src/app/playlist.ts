@@ -1,5 +1,6 @@
 import { Image } from './image';
 import { Track } from './track';
+import { PublicUser } from './user';
 
 export interface SimplifiedPlaylist {
     collaborative: boolean,
@@ -19,8 +20,8 @@ export interface TracksObject {
 }
 
 export interface PlaylistTrackObject {
-    added_at: string,
-    // TODO added_by
-    is_local: boolean,
-    track: Track
+    added_at: string;
+    added_by: PublicUser;
+    is_local: boolean;
+    track: Track;
 }
