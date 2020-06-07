@@ -32,7 +32,7 @@ export class OutputComponent implements OnInit {
     }
 
     getImageSrc(song: PlaylistTrackObject): string {
-        return "https://dummyimage.com/300x300/000000/aaaaaa.png";
+        return song.track.album.images[1].url;
     }
 
 }

@@ -1,7 +1,8 @@
 import { SimplifiedArtist } from './artist';
+import { SimplifiedAlbum } from './album';
 
 export interface Track {
-    // TODO Album
+    album: SimplifiedAlbum,
     artists: SimplifiedArtist[],
     available_markets: string[],
     disc_number: number,
