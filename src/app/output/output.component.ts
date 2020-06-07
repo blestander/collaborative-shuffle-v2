@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlaylistTrackObject } from '../playlist';
 
 @Component({
@@ -9,6 +9,7 @@ import { PlaylistTrackObject } from '../playlist';
 export class OutputComponent implements OnInit {
 
     @Input() songs: PlaylistTrackObject[];
+    @Output() menuRequested = new EventEmitter<void>();
 
     constructor() { }
 
@@ -35,4 +36,7 @@ export class OutputComponent implements OnInit {
         return song.track.album.images[1].url;
     }
 
+    onGoBack() {
+        this.menuRequested.emit();
+    }
 }

@@ -29,4 +29,9 @@ export class AppComponent implements OnInit {
         this.shuffleRequest = request;
         this.shuffleService.shuffle(request).subscribe(song => this.songs.push(song));
     }
+
+    onMenuRequested() {
+        this.shuffleRequest = null;
+        this.songs = [];
+    }
 }
