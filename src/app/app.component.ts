@@ -25,6 +25,10 @@ export class AppComponent implements OnInit {
         this.spotify.loggedIn.subscribe(loggedIn => this.loggedIn = loggedIn);
     }
 
+    requestTotalSongs(): number {
+        return this.shuffleRequest.playlist.tracks.total;
+    }
+
     onShuffleRequested(request: ShuffleRequest): void {
         this.shuffleRequest = request;
         this.shuffleService.shuffle(request).subscribe(song => this.songs.push(song));

@@ -9,6 +9,7 @@ import { PlaylistTrackObject } from '../playlist';
 export class OutputComponent implements OnInit {
 
     @Input() songs: PlaylistTrackObject[];
+    @Input() total: number;
     @Output() menuRequested = new EventEmitter<void>();
 
     constructor() { }

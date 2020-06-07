@@ -1,5 +1,6 @@
 <div class="main-box">
     <h2>Results</h2>
+    <progress [value]="songs.length" [max]="total">{{songs.length/total | percent}}</progress>
     <div class="song-list">
         <ng-container *ngFor="let song of songs">
             <img [src]="getImageSrc(song)" />
