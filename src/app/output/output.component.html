@@ -1,4 +1,4 @@
 <div class="main-box">
     <h2>Results</h2>
-    <p *ngFor="let song of songs">{{song}}</p>
+    <app-song-display *ngFor="let song of songs" [item]="song"></app-song-display>
 </div>
