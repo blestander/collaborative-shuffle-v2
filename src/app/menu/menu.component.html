@@ -3,8 +3,9 @@
         <div class="menu">
             <label for="playlistSelect">Select a playlist:</label>
             <select name="playlistSelect" formControlName="playlist" required>
-                <option value="p1">Playlist 1</option>
-                <option value="p2">Playlist 2</option>
+                <option *ngFor="let playlist of playlists; index as index" [value]="index">
+                    {{ playlistDisplay(playlist)}}
+                </option>
             </select>
             <span class="mobile-separator">&nbsp;</span>
             <label for="deviceSelect">Select a device:</label>

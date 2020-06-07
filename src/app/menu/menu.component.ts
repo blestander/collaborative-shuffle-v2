@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SpotifyService } from '../spotify.service';
 import { Device } from '../device';
+import { SimplifiedPlaylist } from '../playlist';
 
 @Component({
     selector: 'app-menu',
@@ -16,6 +17,7 @@ export class MenuComponent implements OnInit {
         algorithm: ['true-shuffle', Validators.required]
     });
 
+    playlists: SimplifiedPlaylist[] = [];
     devices: Device[] = [];
 
     constructor(
@@ -25,7 +27,11 @@ export class MenuComponent implements OnInit {
 
     ngOnInit(): void {
         this.spotify.devices.subscribe(ds => this.devices = ds);
-        this.spotify.userPlaylists.subscribe(ps => console.log(ps));
+        this.spotify.userPlaylists.subscribe(playlist => this.playlists.push(playlist));
+    }
+
+    playlistDisplay(playlist: SimplifiedPlaylist) {
+        return `${playlist.name}`;
     }
 
     deviceDisplay(device: Device) {
