@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, generate, empty, pipe } from 'rxjs';
-import { map, pluck, exhaust, expand, mergeMap } from 'rxjs/operators';
+import { Observable, of, empty } from 'rxjs';
+import { pluck, expand, mergeMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Device } from './device';
-import { SimplifiedPlaylist } from './playlist';
+import { SimplifiedPlaylist, PlaylistTrackObject } from './playlist';
 
 const fragmentRegex = /access_token=(.*)&/
 
@@ -47,6 +47,24 @@ export class SpotifyService {
             })) // All paging objects
             .pipe(pluck('items')) // Observable<SimplifiedPlaylist[]>
             .pipe(mergeMap(array => array)); // Observable<SimplifiedPlaylist>
+    }
+
+    getPlaylistSongs(playlist_id: string): Observable<any> {
+        return this.http.get<PagingObject<PlaylistTrackObject>>(
+            `https://api.spotify.com/v1/playlists/${playlist_id}/tracks`,
+            { headers: this.authHeader }
+        ) // First page of paging objects
+            .pipe(expand(po => {
+                if (po.next)
+                    return this.http.get<PagingObject<PlaylistTrackObject>>(
+                        po.next,
+                        { headers: this.authHeader }
+                    );
+                else
+                    return empty();
+            })) // All paging objects
+            .pipe(pluck('items')) // Observable<PlaylistTrackObject[]>
+            .pipe(mergeMap(array => array)); // Observable<PlaylistTrackObject>
     }
 
     private get accessToken(): string {

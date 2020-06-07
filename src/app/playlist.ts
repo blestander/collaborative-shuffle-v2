@@ -1,4 +1,5 @@
 import { Image } from './image';
+import { Track } from './track';
 
 export interface SimplifiedPlaylist {
     collaborative: boolean,
@@ -15,4 +16,11 @@ export interface SimplifiedPlaylist {
 export interface TracksObject {
     href: string,
     total: number,
+}
+
+export interface PlaylistTrackObject {
+    added_at: string,
+    // TODO added_by
+    is_local: boolean,
+    track: Track
 }
