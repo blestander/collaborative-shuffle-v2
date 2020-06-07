@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from './spotify.service';
 import { ShuffleRequest } from './shuffle-request';
 import { SpotifyShuffleService } from './spotify-shuffle.service';
+import { PlaylistTrackObject } from './playlist';
 
 @Component({
     selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent implements OnInit {
 
     loggedIn: boolean;
     shuffleRequest: ShuffleRequest = null;
+    songs: PlaylistTrackObject[] = [];
 
     constructor (
         public spotify: SpotifyService,
@@ -25,6 +27,6 @@ export class AppComponent implements OnInit {
 
     onShuffleRequested(request: ShuffleRequest): void {
         this.shuffleRequest = request;
-        this.shuffleService.shuffle(request).subscribe(o => console.log(o));
+        this.shuffleService.shuffle(request).subscribe(song => this.songs.push(song));
     }
 }
