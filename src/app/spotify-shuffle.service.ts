@@ -24,7 +24,24 @@ export class SpotifyShuffleService {
     }
 
     private shuffleSongs(songs: PlaylistTrackObject[], method: string) {
-        // TODO
+        switch (method) {
+            case "true-shuffle":
+                return this.shuffleTrueShuffle(songs);
+            case "perfect-mix":
+                return songs;
+            case "pass-through":
+            default:
+                return songs;
+        }
+    }
+
+    private shuffleTrueShuffle(songs: PlaylistTrackObject[]) {
+        for (let i = songs.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            let swap = songs[i];
+            songs[i] = songs[j];
+            songs[j] = swap;
+        }
         return songs;
     }
 }
