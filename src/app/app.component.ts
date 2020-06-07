@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
     title = 'spotify-collaborative-shuffle';
 
     loggedIn: boolean;
+    shuffleRequest: ShuffleRequest = null;
 
     constructor (public spotify: SpotifyService) { }
 
@@ -19,6 +20,6 @@ export class AppComponent implements OnInit {
     }
 
     onShuffleRequested(request: ShuffleRequest): void {
-        console.log(request);
+        this.shuffleRequest = request;
     }
 }
