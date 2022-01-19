@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, empty } from 'rxjs';
-import { pluck, expand, mergeMap } from 'rxjs/operators';
+import { pluck, expand, mergeMap, concatMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Device } from './device';
 import { SimplifiedPlaylist, PlaylistTrackObject } from './playlist';
 import { environment } from 'src/environments/environment';
+import { PublicUser } from './user';
 
 const fragmentRegex = /access_token=(.*)&/
 
@@ -51,6 +52,13 @@ export class SpotifyService {
             .pipe(mergeMap(array => array)); // Observable<SimplifiedPlaylist>
     }
 
+    get userID(): Observable<string> {
+        return this.http.get<PublicUser>(
+            `https://api.spotify.com/v1/me`,
+            { headers: this.authHeader },
+        ).pipe(pluck('id'));
+    }
+
     getPlaylistSongs(playlist_id: string): Observable<any> {
         return this.http.get<PagingObject<PlaylistTrackObject>>(
             `https://api.spotify.com/v1/playlists/${playlist_id}/tracks`,
@@ -77,6 +85,22 @@ export class SpotifyService {
         );
     }
 
+    createPlaylist(name: string, description: string) {
+        const request: CreatePlaylistObject = {
+            name: name,
+            public: false,
+            collaborative: false,
+            description: description,
+        };
+        return this.userID.pipe(
+            concatMap(userID => this.http.post(
+                `https://api.spotify.com/v1/users/${userID}/playlists`,
+                request,
+                { headers: this.authHeader }
+            ))
+        );
+    }
+
     private get accessToken(): string {
         let fragment = location.hash.substr(1);
         let result = fragmentRegex.exec(fragment);
@@ -91,6 +115,13 @@ export class SpotifyService {
             'Authorization': `Bearer ${this.accessToken}`
         }
     }
+}
+
+interface CreatePlaylistObject {
+    name: string;
+    public: boolean;
+    collaborative: boolean;
+    description: string;
 }
 
 interface PagingObject<T> {
