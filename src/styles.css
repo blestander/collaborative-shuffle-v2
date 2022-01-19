@@ -26,6 +26,7 @@ a.button, button {
     font-weight: bold;
     font-family: Montserrat, sans-serif;
     font-size: 16px;
+    font-weight: 500;
 
     display: inline-block;
     border: none;
