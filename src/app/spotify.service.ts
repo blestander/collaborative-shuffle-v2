@@ -4,6 +4,7 @@ import { pluck, expand, mergeMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Device } from './device';
 import { SimplifiedPlaylist, PlaylistTrackObject } from './playlist';
+import { environment } from 'src/environments/environment';
 
 const fragmentRegex = /access_token=(.*)&/
 
@@ -16,9 +17,10 @@ export class SpotifyService {
         private http: HttpClient
     ) { }
 
-    authorizeIndirectGrant(redirect_uri: string, client_id: string, scope: string[] = []): void {
+    authorizeIndirectGrant(redirect_uri: string, scope: string[] = []): void {
         let encodedScope = encodeURI(scope.join(" "));
-        let url = `https://accounts.spotify.com/authorize?response_type=token&redirect_uri=${redirect_uri}&client_id=${client_id}&scope=${encodedScope}`;
+        const clientID = environment.clientID;
+        let url = `https://accounts.spotify.com/authorize?response_type=token&redirect_uri=${redirect_uri}&client_id=${clientID}&scope=${encodedScope}`;
         location.assign(url);
     }
 
