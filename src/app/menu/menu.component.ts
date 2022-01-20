@@ -16,7 +16,6 @@ export class MenuComponent implements OnInit {
 
     form: FormGroup = this.fb.group({
         playlist: ['', Validators.required],
-        device: ['', Validators.required],
         algorithm: ['true-shuffle', Validators.required]
     });
 
@@ -46,7 +45,6 @@ export class MenuComponent implements OnInit {
         let formOutput = this.form.value;
         let request: ShuffleRequest = {
             playlist: this.playlists[formOutput.playlist],
-            device: this.devices[formOutput.device],
             algorithm: formOutput.algorithm
         };
         this.shuffleRequested.emit(request);
