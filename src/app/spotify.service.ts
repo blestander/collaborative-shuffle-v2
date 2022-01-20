@@ -101,6 +101,16 @@ export class SpotifyService {
         );
     }
 
+    addItemsToPlaylist(playlistID: string, itemURIs: string[]): Observable<void> {
+        return this.http.post<void>(
+            `https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
+            {
+                uris: itemURIs
+            },
+            { headers: this.authHeader}
+        )
+    };
+
     private get accessToken(): string {
         let fragment = location.hash.substr(1);
         let result = fragmentRegex.exec(fragment);

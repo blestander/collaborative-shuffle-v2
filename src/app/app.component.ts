@@ -3,7 +3,7 @@ import { SpotifyService } from './spotify.service';
 import { ShuffleRequest } from './shuffle-request';
 import { SpotifyShuffleService } from './spotify-shuffle.service';
 import { PlaylistTrackObject } from './playlist';
-import { bufferCount } from 'rxjs/operators';
+import { bufferCount, delayWhen } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 
 @Component({
@@ -43,14 +43,15 @@ export class AppComponent implements OnInit {
             ].join('\n'),
         );
         const playlistAndSongs$ = combineLatest([newPlaylist$, bufferedShuffledSongs$]);
-        playlistAndSongs$.subscribe({
-            next: ([playlist, songs]) => {
-                console.log(songs);
-                this.songs = this.songs.concat(songs);
-            },
-            complete: () => console.log('Done')
-        })
-        // .subscribe(song => this.songs.push(song));
+        playlistAndSongs$.pipe(
+            // Add songs to playlist and delay visual output until complete
+            delayWhen(([playlist, tracks]) => this.spotify.addItemsToPlaylist(
+                playlist.id,
+                tracks.map(track => track.track.uri)
+            ))
+        ).subscribe({
+            next: ([playlist, songs]) => this.songs = this.songs.concat(songs)
+        });
     }
 
     onMenuRequested() {
