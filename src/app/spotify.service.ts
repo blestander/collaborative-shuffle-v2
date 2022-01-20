@@ -85,7 +85,7 @@ export class SpotifyService {
         );
     }
 
-    createPlaylist(name: string, description: string) {
+    createPlaylist(name: string, description: string): Observable<SimplifiedPlaylist> {
         const request: CreatePlaylistObject = {
             name: name,
             public: false,
@@ -93,7 +93,7 @@ export class SpotifyService {
             description: description,
         };
         return this.userID.pipe(
-            concatMap(userID => this.http.post(
+            concatMap(userID => this.http.post<SimplifiedPlaylist>(
                 `https://api.spotify.com/v1/users/${userID}/playlists`,
                 request,
                 { headers: this.authHeader }

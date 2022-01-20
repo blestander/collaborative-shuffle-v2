@@ -12,14 +12,11 @@ export class SpotifyShuffleService {
 
     constructor(private spotify: SpotifyService) { }
 
-    shuffle(request: ShuffleRequest): Observable<any> {
+    shuffle(request: ShuffleRequest): Observable<PlaylistTrackObject> {
         return this.spotify.getPlaylistSongs(request.playlist.id)
             .pipe(toArray())
             .pipe(map(songs => this.shuffleSongs(songs, request.algorithm)))
-            .pipe(mergeMap(songs => songs))
-            .pipe(mergeMap(song => {
-                return this.spotify.addItemToQueue(song.track.uri, request.device.id).pipe(mergeMap(() => of(song)));
-            }, 1));
+            .pipe(mergeMap(songs => songs));
     }
 
     private shuffleSongs(songs: PlaylistTrackObject[], method: string) {
