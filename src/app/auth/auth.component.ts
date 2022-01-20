@@ -20,8 +20,6 @@ export class AuthComponent implements OnInit {
                 "playlist-read-private",
                 "playlist-read-collaborative",
                 'playlist-modify-private',
-                "user-read-playback-state",
-                "user-modify-playback-state"
             ],
         );
     }
